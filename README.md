@@ -1,2 +1,3 @@
 # BJ
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+1. 주 2회 알고리즘 스터디 문제 풀이
+2. 개인 연습용 문제 풀이
