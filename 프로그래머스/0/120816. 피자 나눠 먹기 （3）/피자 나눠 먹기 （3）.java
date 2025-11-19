@@ -6,5 +6,8 @@ class Solution {
         else answer = n/slice;
         
         return answer;
+        
+        // 삼항 연산자 쓰는 것도 연습해보기 
+        // return n % slice > 0 ? n/slice+1 : n/slice;
     }
 }
