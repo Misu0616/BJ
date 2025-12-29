@@ -1,7 +1,7 @@
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -27,48 +27,48 @@ public class Main {
 			friend[a][b] = friend[b][a] = true;
 		}
 		
-		int answer = 1;
-		int min = Integer.MAX_VALUE;
+		int person = 1; // 사람은 1부터 시작
+		int min = Integer.MAX_VALUE; // 케빈 베이컨 값을 최대에서 최소로 줄여감
 
+		// 케빈 베이컨의 수가 가장 작은 사람 구하기
 		for (int i = 1; i <= N; i++) {
+			
 		    int result = bfs(i);
 
 		    if (result < min) {
 		        min = result;
-		        answer = i;
+		        person = i;
 		    }
 		}
 
-		System.out.println(answer);
+		System.out.println(person);
 
-		
 	}
 
-	static int bfs(int start) {
+	static int bfs(int personNum) {
 		
-		Queue<Integer> q = new LinkedList<>(); 
-	    boolean[] visited = new boolean[N + 1];
-	    int[] dist = new int[N + 1];
+		Queue<Integer> q = new ArrayDeque<>(); 
+	    boolean[] visited = new boolean[N + 1]; // 연결된 친구 관계 방문 여부
+	    int[] dist = new int[N + 1]; // 방문하면서 사람 간의 이동을 거리화
 
-	    q.add(start);
-		visited[start] = true;
-
+	    q.add(personNum);
+		visited[personNum] = true;
+		int sum = 0;
+		
 		while (!q.isEmpty()) {
-		    int cur = q.poll();
+		    int curNum = q.poll();
 
+		    // 큐를 사용해 distance 구해서 sum으로 보내주기
 		    for (int i = 1; i <= N; i++) {
-		        if (friend[cur][i] && !visited[i]) {
+		        if (friend[curNum][i] && !visited[i]) { // 현재 사람과 친구인 i 찾기
 		            visited[i] = true;
-		            dist[i] = dist[cur] + 1; 
+		            dist[i] = dist[curNum] + 1;
 		            q.add(i);
+		            sum += dist[i];
 		        }
 		    }
 		}
 		
-		int sum = 0;
-		for (int i = 1; i <= N; i++) {
-		    sum += dist[i];
-		}
 		return sum;
 	}
 
