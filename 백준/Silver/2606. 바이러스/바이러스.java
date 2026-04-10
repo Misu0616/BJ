@@ -1,5 +1,8 @@
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -25,19 +28,39 @@ public class Main {
 			graph[a][b] = graph[b][a] = 1;
 		}
 		
-		dfs(1);
-		System.out.println(result -1);
+		//dfs(1);
+		bfs(1);
+		System.out.println(result);
 		
 	}
 	
 	static void dfs(int v) {
 		
 		visited[v] = true;
-		result++;
 		
 		for(int i = 0; i <= N; i++) {
 			if(graph[v][i] == 1 && !visited[i]) {
+				result++;
 				dfs(i);
+			}
+		}
+		
+	}
+	
+	static void bfs(int v) {
+		Queue<Integer> q = new ArrayDeque<>();
+		q.offer(v);
+		visited[v] = true;
+		
+		while(!q.isEmpty()) {
+			int result2 = q.poll();
+			
+			for(int i = 0; i<= N; i++) {
+				if(graph[result2][i] == 1 && !visited[i]) {
+					q.offer(i);
+					visited[i] = true;
+					result++;
+				}
 			}
 		}
 		
